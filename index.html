@@ -6,34 +6,61 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
+    <button onclick="askNewGrid()">New Grid</button>
     <div class="container"></div>
     <script>
         const container = document.querySelector('.container');
 
         let divArray = [];
+        let rowDiv = [];
         let rows = 16;
         let columns = 16;
 
         // creating two-dimensional array
-        for (let i = 0; i < rows; i++) {
-            divArray[i] = [];
-            for (let j = 0; j < columns; j++) {
-                divArray[i][j] = document.createElement('div');
-                divArray[i][j].classList.add('grid');
-                container.appendChild(divArray[i][j]);
+        createNewGrid();
+
+        function deleteOldGrid(){
+            for (let i = 0; i < rows; i++) {
+                container.removeChild(rowDiv[i]);
+                for (let j = 0; j < columns; j++) {
+                    rowDiv[i].removeChild(divArray[i][j]);
+                }
+            }
+            divArray = [];
+            rowDiv = [];
+            rows = 0;
+            columns = 0;
+        }
+
+        function createNewGrid(){
+            for (let i = 0; i < rows; i++) {
+                rowDiv[i] = document.createElement('div');
+                rowDiv[i].classList.add('rowGrid');
+                container.appendChild(rowDiv[i]);
+                divArray[i] = [];
+                for (let j = 0; j < columns; j++) {
+                    divArray[i][j] = document.createElement('div');
+                    divArray[i][j].classList.add('grid');
+                    rowDiv[i].appendChild(divArray[i][j]);
+                    divArray[i][j].addEventListener('mouseover', function () {
+                        divArray[i][j].style.background = 'black';
+                });
+                }
             }
         }
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < columns; j++) {
-            const grid = divArray[i][j];
-            grid.addEventListener('mouseover', function () {
-                grid.style.background = 'black';
-            });
-            grid.addEventListener('mouseleave', function () {
-                grid.style.background = 'white';
-            });
+
+        function askNewGrid(){
+            let newRows = prompt("Please enter the number of squares per side for the new grid", 16);
+            if(newRows < 100){
+                deleteOldGrid();
+                rows = newRows;
+                columns = rows;
+                createNewGrid();
+            } else {
+                alert('Must be less than 100.');
+            }
         }
-    }
+
     </script>
 </body>
 </html>
