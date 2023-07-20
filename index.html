@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container"></div>
+    <script>
+        const container = document.querySelector('.container');
+
+        let divArray = [];
+        let rows = 16;
+        let columns = 16;
+
+        // creating two-dimensional array
+        for (let i = 0; i < rows; i++) {
+        divArray[i] = [];
+        for (let j = 0; j < columns; j++) {
+            divArray[i][j] = document.createElement('div');
+            container.appendChild(divArray[i][j]);
+        }
+        }
+    </script>
+</body>
+</html>
