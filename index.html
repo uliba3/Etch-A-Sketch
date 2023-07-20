@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
     <div class="container"></div>
@@ -15,12 +16,24 @@
 
         // creating two-dimensional array
         for (let i = 0; i < rows; i++) {
-        divArray[i] = [];
+            divArray[i] = [];
+            for (let j = 0; j < columns; j++) {
+                divArray[i][j] = document.createElement('div');
+                divArray[i][j].classList.add('grid');
+                container.appendChild(divArray[i][j]);
+            }
+        }
+    for (let i = 0; i < rows; i++) {
         for (let j = 0; j < columns; j++) {
-            divArray[i][j] = document.createElement('div');
-            container.appendChild(divArray[i][j]);
+            const grid = divArray[i][j];
+            grid.addEventListener('mouseover', function () {
+                grid.style.background = 'black';
+            });
+            grid.addEventListener('mouseleave', function () {
+                grid.style.background = 'white';
+            });
         }
-        }
+    }
     </script>
 </body>
 </html>
