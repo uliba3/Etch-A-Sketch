@@ -2,65 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Grid Drawing</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-    <button onclick="askNewGrid()">New Grid</button>
+    <button onclick="saveGrid()">Save Grid</button>
+    <button onclick="createNewGrid()">New Grid</button>
+    <button onclick="toggleEraser()">Eraser</button>
+    <div class="gridNumber"></div>
     <div class="container"></div>
+    <div class="oldGrids"></div>
     <script>
+        const gridNum = document.querySelector('.gridNumber');
         const container = document.querySelector('.container');
+        const oldGridsContainer = document.querySelector('.oldGrids');
 
+        let oldGrids = [];
         let divArray = [];
         let rowDiv = [];
         let rows = 16;
         let columns = 16;
+        let eraserMode = false;
+        let gridColor = 'black';
+        let isMouseDown = false;
+        let savedGrids = loadSavedGrids() || [];
 
-        // creating two-dimensional array
-        createNewGrid();
-
-        function deleteOldGrid(){
-            for (let i = 0; i < rows; i++) {
-                container.removeChild(rowDiv[i]);
-                for (let j = 0; j < columns; j++) {
-                    rowDiv[i].removeChild(divArray[i][j]);
-                }
-            }
-            divArray = [];
-            rowDiv = [];
-            rows = 0;
-            columns = 0;
+        function toggleEraser() {
+            eraserMode = !eraserMode;
+            gridColor = eraserMode ? 'white' : 'black';
         }
 
-        function createNewGrid(){
+        function createGrid(rows, columns) {
             for (let i = 0; i < rows; i++) {
-                rowDiv[i] = document.createElement('div');
-                rowDiv[i].classList.add('rowGrid');
+                rowDiv[i] = createRow();
                 container.appendChild(rowDiv[i]);
                 divArray[i] = [];
                 for (let j = 0; j < columns; j++) {
-                    divArray[i][j] = document.createElement('div');
-                    divArray[i][j].classList.add('grid');
+                    divArray[i][j] = createGridCell(i, j);
                     rowDiv[i].appendChild(divArray[i][j]);
-                    divArray[i][j].addEventListener('mouseover', function () {
-                        divArray[i][j].style.background = 'black';
-                });
                 }
             }
         }
 
-        function askNewGrid(){
-            let newRows = prompt("Please enter the number of squares per side for the new grid", 16);
-            if(newRows < 100){
-                deleteOldGrid();
-                rows = newRows;
-                columns = rows;
-                createNewGrid();
-            } else {
-                alert('Must be less than 100.');
+        function createRow() {
+            const row = document.createElement('div');
+            row.classList.add('rowGrid');
+            return row;
+        }
+
+        function createGridCell(i, j) {
+            const cell = document.createElement('div');
+            cell.classList.add('grid');
+            cell.addEventListener('mouseover', () => handleCellMouseOver(i, j));
+            cell.addEventListener('mousedown', () => handleCellMouseDown(i, j));
+            cell.addEventListener('mouseup', () => handleCellMouseUp());
+            return cell;
+        }
+
+        function handleCellMouseOver(i, j) {
+            if (isMouseDown) {
+                divArray[i][j].style.backgroundColor = gridColor;
             }
         }
 
+        function handleCellMouseDown(i, j) {
+            isMouseDown = true;
+            divArray[i][j].style.backgroundColor = gridColor;
+        }
+
+        function handleCellMouseUp() {
+            isMouseDown = false;
+        }
+
+        function deleteGrid() {
+            container.innerHTML = '';
+            divArray = [];
+            rowDiv = [];
+        }
+
+        function createNewGrid() {
+            const newRows = prompt("Please enter the number of squares per side for the new grid", 16);
+            if (newRows && newRows <= 100) {
+                rows = newRows;
+                columns = rows;
+                deleteGrid();
+                createGrid(rows, columns);
+                gridNum.textContent = `Grid ${savedGrids.length + 1}`;
+            } else {
+                alert('Invalid input. Must be less than or equal to 100.');
+            }
+        }
+
+        function loadSavedGrids() {
+            return JSON.parse(localStorage.getItem('savedGrids')) || [];
+        }
+
+        function saveGrid() {
+            const gridNumText = gridNum.textContent; // Get the entire text
+            const gridNumberValue = gridNumText.match(/\d+/)[0]; // Extract the number
+            const index = gridNumberValue - 1;
+            const gridData = [];
+
+            for (let i = 0; i < rows; i++) {
+                gridData[i] = [];
+                for (let j = 0; j < columns; j++) {
+                    gridData[i][j] = divArray[i][j].style.backgroundColor;
+                }
+            }
+
+            savedGrids[index] = gridData;
+            localStorage.setItem('savedGrids', JSON.stringify(savedGrids));
+        }
+
+        function updateGridNumber(index) {
+            gridNum.textContent = `Grid ${index + 1}`;
+        }
+
+        function showOldGrids() {
+            oldGridsContainer.innerHTML = '';
+            for (let i = 0; i < savedGrids.length; i++) {
+                const gridLink = document.createElement('a');
+                gridLink.href = "#";
+                gridLink.textContent = `Grid ${i + 1} `;
+                gridLink.addEventListener('click', () => openSavedGrid(i));
+                oldGridsContainer.appendChild(gridLink);
+            }
+        }
+
+        function openSavedGrid(index) {
+            const gridData = savedGrids[index];
+            if (gridData) {
+                rows = gridData.length;
+                columns = gridData[0].length;
+                deleteGrid();
+                createGrid(rows, columns);
+                for (let i = 0; i < rows; i++) {
+                    for (let j = 0; j < columns; j++) {
+                        divArray[i][j].style.backgroundColor = gridData[i][j];
+                    }
+                }
+                updateGridNumber(index);
+            }
+        }
+
+        showOldGrids();
+        createGrid(rows, columns);
+        updateGridNumber(savedGrids.length);
     </script>
 </body>
 </html>
