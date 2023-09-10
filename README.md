@@ -41,9 +41,6 @@ This web app is built using HTML, CSS, and JavaScript. Here's an overview of the
 
 - `script` (within `index.html`): The JavaScript code that handles grid creation, drawing, saving, and loading of grids from local storage.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
