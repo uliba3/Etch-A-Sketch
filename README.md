@@ -1,4 +1,3 @@
-# Etch-A-Sketch
 # Grid Drawing Web App
 
 The Grid Drawing Web App is a simple web application that allows users to create and save grids of customizable sizes. Users can draw on the grid using a black or white pen (eraser mode), save their drawings, and access previously saved grids.
