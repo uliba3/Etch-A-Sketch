@@ -1,5 +1,14 @@
+@keyframes backgroundColorChange {
+    0% {background-color: white;}
+    50% {background-color: black;}
+    100% {background-color: white;}
+}  
+
 body{
     text-align: center;
+    animation-name: backgroundColorChange;
+    animation-duration: 64s;
+    animation-iteration-count: infinite;
 }
 
 /* Style for buttons */
@@ -25,6 +34,7 @@ button {
 
 /* Style for the grid number */
 .gridNumber {
+    color: red;
     font-size: 24px;
     margin-top: 20px;
 }
