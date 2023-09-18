@@ -27,7 +27,11 @@ The Grid Drawing Web App is a simple web application that allows users to create
    - Click the "Save Grid" button to save the current grid state.
    - The saved grid will be added to the list of old grids.
 
-4. **Accessing Saved Grids:**
+4. **Deleting a Grid:**
+   - Click the "Delete Grid" button to delete the current grid state.
+   - The deleted grid will be deleted from the list of old grids.
+
+5. **Accessing Saved Grids:**
    - Under the "Old Grids" section, click on the links labeled "Grid 1," "Grid 2," and so on to access previously saved grids.
 
 ## Development
