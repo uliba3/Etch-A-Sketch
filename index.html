@@ -6,8 +6,9 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-    <button onclick="saveGrid()">Save Grid</button>
     <button onclick="createNewGrid()">New Grid</button>
+    <button onclick="saveGrid()">Save Grid</button>
+    <button onclick="deleteOldGrid()">Delete Grid</button>
     <button onclick="toggleEraser()" class="eraser">Eraser</button>
     <div class="gridNumber"></div>
     <div class="container"></div>
@@ -26,7 +27,8 @@
         let eraserMode = false;
         let gridColor = 'black';
         let isMouseDown = false;
-        let savedGrids = loadSavedGrids() || [];
+        let savedGrids = loadSavedGrids();
+        let currentGridNum = savedGrids.length;
 
         function toggleEraser() {
             eraserMode = !eraserMode;
@@ -94,9 +96,7 @@
             if (newRows && newRows <= 100) {
                 rows = newRows;
                 columns = rows;
-                deleteGrid();
-                createGrid(rows, columns);
-                gridNum.textContent = `Grid ${savedGrids.length + 1}`;
+                initialization();
             } else {
                 alert('Invalid input. Must be less than or equal to 100.');
             }
@@ -107,9 +107,6 @@
         }
 
         function saveGrid() {
-            const gridNumText = gridNum.textContent; // Get the entire text
-            const gridNumberValue = gridNumText.match(/\d+/)[0]; // Extract the number
-            const index = gridNumberValue - 1;
             const gridData = [];
 
             for (let i = 0; i < rows; i++) {
@@ -118,13 +115,22 @@
                     gridData[i][j] = divArray[i][j].style.backgroundColor;
                 }
             }
-
-            savedGrids[index] = gridData;
+            savedGrids[currentGridNum] = gridData;
             localStorage.setItem('savedGrids', JSON.stringify(savedGrids));
+            initialization();
         }
 
-        function updateGridNumber(index) {
-            gridNum.textContent = `Grid ${index + 1}`;
+        function deleteOldGrid() {
+            if(currentGridNum >= savedGrids.length){
+                return;
+            }
+            savedGrids.splice(currentGridNum, 1)
+            localStorage.setItem('savedGrids', JSON.stringify(savedGrids));
+            initialization();
+        }
+
+        function updateGridNumber() {
+            gridNum.textContent = `Grid ${currentGridNum}`;
         }
 
         function showOldGrids() {
@@ -132,7 +138,7 @@
             for (let i = 0; i < savedGrids.length; i++) {
                 const gridLink = document.createElement('a');
                 gridLink.href = "#";
-                gridLink.textContent = `Grid ${i + 1} `;
+                gridLink.textContent = `Grid ${i} `;
                 gridLink.addEventListener('click', () => openSavedGrid(i));
                 oldGridsContainer.appendChild(gridLink);
             }
@@ -150,13 +156,21 @@
                         divArray[i][j].style.backgroundColor = gridData[i][j];
                     }
                 }
-                updateGridNumber(index);
+                currentGridNum = index;
+                updateGridNumber();
             }
         }
 
-        showOldGrids();
-        createGrid(rows, columns);
-        updateGridNumber(savedGrids.length);
+        function initialization() {
+            savedGrids = loadSavedGrids();
+            currentGridNum = savedGrids.length;
+            deleteGrid();
+            showOldGrids();
+            createGrid(rows, columns);
+            updateGridNumber();
+        }
+
+        initialization();
     </script>
 </body>
 </html>
