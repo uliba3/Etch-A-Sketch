@@ -8,11 +8,12 @@
 <body>
     <button onclick="saveGrid()">Save Grid</button>
     <button onclick="createNewGrid()">New Grid</button>
-    <button onclick="toggleEraser()">Eraser</button>
+    <button onclick="toggleEraser()" class="eraser">Eraser</button>
     <div class="gridNumber"></div>
     <div class="container"></div>
     <div class="oldGrids"></div>
     <script>
+        const eraser = document.querySelector('.eraser');
         const gridNum = document.querySelector('.gridNumber');
         const container = document.querySelector('.container');
         const oldGridsContainer = document.querySelector('.oldGrids');
@@ -29,7 +30,15 @@
 
         function toggleEraser() {
             eraserMode = !eraserMode;
-            gridColor = eraserMode ? 'white' : 'black';
+            if(eraserMode){
+                gridColor = 'white';
+                eraser.style.backgroundColor = 'black';
+                eraser.style.color = 'white';
+            }else {
+                gridColor = 'black';
+                eraser.style.backgroundColor = 'white';
+                eraser.style.color = 'black';
+            }
         }
 
         function createGrid(rows, columns) {
