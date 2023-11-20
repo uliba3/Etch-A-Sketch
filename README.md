@@ -1,20 +1,23 @@
-# Etch A Sketch
-<div style="display: flex; justify-content: space-between;">
-  <img src="assets\etchASketch.gif" alt="Circle Game" width="400">
-  <img src="assets\plumber.png" alt="Circle Game Screenshot" width="400">
-</div>
+# Etch A Sketch Web App
 
-The Grid Drawing Web App is a simple web application that allows users to create and save grids of customizable sizes. Users can draw on the grid using a black pen, save their drawings, and access previously saved grids.
+Welcome to Etch A Sketch, a simple and fun web application that lets you unleash your creativity by creating and saving grids of customizable sizes. Experience the joy of drawing and doodling in a digital space!
+
+Explore the Etch A Sketch Web App [here](https://uliba3.github.io/Etch-A-Sketch/).
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="assets\etchASketch.gif" alt="Etch A Sketch Web App" width="400">
+  <img src="assets\plumber.png" alt="Etch A Sketch Screenshot" width="400">
+</div>
 
 ## Features
 
-- **Grid Creation:** Users can create a new grid by specifying the number of squares per side (up to 100) using the "New Grid" button.
+- **Grid Creation:** Create a new grid by specifying the number of squares per side (up to 100) using the "New Grid" button.
 
-- **Drawing:** Users can draw on the grid by clicking and dragging the mouse over the cells. They can switch between drawing and erasing modes using the "Eraser" button.
+- **Drawing:** Express yourself by drawing on the grid with a black pen. Switch to eraser mode using the "Eraser" button.
 
-- **Grid Saving:** Users can save their current grid by clicking the "Save Grid" button. Saved grids are stored in the browser's local storage.
+- **Grid Saving:** Save your artistic creations by clicking the "Save Grid" button. Your saved grids are stored in the browser's local storage.
 
-- **Access Saved Grids:** Users can access previously saved grids by clicking on the links displayed under the "Old Grids" section.
+- **Access Saved Grids:** Revisit your masterpieces by clicking on the links under the "Old Grids" section to access previously saved grids.
 
 ## Usage
 
@@ -25,30 +28,29 @@ The Grid Drawing Web App is a simple web application that allows users to create
 
 2. **Drawing and Erasing:**
    - Click and drag the mouse over the grid cells to draw (in black by default).
-   - To switch to eraser mode, click the "Eraser" button. In eraser mode, drawing will be in white.
+   - Switch to eraser mode by clicking the "Eraser" button. In eraser mode, drawing will be in white.
 
 3. **Saving a Grid:**
-   - Click the "Save Grid" button to save the current grid state.
-   - The saved grid will be added to the list of old grids.
+   - Click the "Save Grid" button to immortalize your current grid state.
+   - Your saved grid will be added to the list of old grids.
 
 4. **Deleting a Grid:**
-   - Click the "Delete Grid" button to delete the current grids state.
-   - The deleted grids will be deleted from the list of old grids.
+   - Click the "Delete Grid" button to bid farewell to the current grid state.
+   - The deleted grid will be removed from the list of old grids.
 
 5. **Accessing Saved Grids:**
-   - Under the "Old Grids" section, click on the links labeled "Grid 1," "Grid 2," and so on to access previously saved grids.
+   - Under the "Old Grids" section, click on the links labeled "Grid 1," "Grid 2," and so on to relive previously saved grids.
 
 ## Development
 
-This web app is built using HTML, CSS, and JavaScript. Here's an overview of the main files and their functions:
+This web app is crafted using HTML, CSS, and JavaScript. Dive into the code in the following files:
 
-- `index.html`: The main HTML file that defines the structure of the web app and includes the JavaScript code.
+- `index.html`: The main HTML file that structures the web app and includes the JavaScript code.
 
-- `style.css`: The CSS file that provides styling for the web app elements, including buttons, grid cells, and links.
+- `style.css`: The CSS file providing stylish elements for buttons, grid cells, and links.
 
-- `script` (within `index.html`): The JavaScript code that handles grid creation, drawing, saving, and loading of grids from local storage.
-
+- `script` (within `index.html`): The JavaScript code handling grid creation, drawing, saving, and loading grids from local storage.
 
 ## Acknowledgments
 
-This web app was created as a simple drawing tool and learning exercise. It may be enhanced and extended in the future with additional features and improvements.
+Etch A Sketch Web App was born as a simple drawing tool and learning exercise. Stay tuned for potential enhancements and additional features in the future!
