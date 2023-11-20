@@ -1,6 +1,10 @@
-# Grid Drawing Web App
+# Etch A Sketch
+<div style="display: flex; justify-content: space-between;">
+  <img src="assets\etchASketch.gif" alt="Circle Game" width="400">
+  <img src="assets\plumber.png" alt="Circle Game Screenshot" width="400">
+</div>
 
-The Grid Drawing Web App is a simple web application that allows users to create and save grids of customizable sizes. Users can draw on the grid using a black or white pen (eraser mode), save their drawings, and access previously saved grids.
+The Grid Drawing Web App is a simple web application that allows users to create and save grids of customizable sizes. Users can draw on the grid using a black pen, save their drawings, and access previously saved grids.
 
 ## Features
 
@@ -28,8 +32,8 @@ The Grid Drawing Web App is a simple web application that allows users to create
    - The saved grid will be added to the list of old grids.
 
 4. **Deleting a Grid:**
-   - Click the "Delete Grid" button to delete the current grid state.
-   - The deleted grid will be deleted from the list of old grids.
+   - Click the "Delete Grid" button to delete the current grids state.
+   - The deleted grids will be deleted from the list of old grids.
 
 5. **Accessing Saved Grids:**
    - Under the "Old Grids" section, click on the links labeled "Grid 1," "Grid 2," and so on to access previously saved grids.
